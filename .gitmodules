@@ -1,0 +1,3 @@
+[submodule "Data/java8/selogger"]
+	path = Data/java8/selogger
+	url = GitHub:takashi-ishio/selogger
