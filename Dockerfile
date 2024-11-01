@@ -10,8 +10,7 @@ RUN apt update && \
 		tar xfz /app/boost_1_80_0.tar.gz -C /app && \
 		rm /app/boost_1_80_0.tar.gz && \
 		(cd /app/POLDAM/Data/java8/selogger && mvn package -DskipTests) && \
-		cmake . && \
-		make && \
+		(cd /app/POLDAM && cmake -DCMAKE_C_COMPILER=/usr/bin/gcc-11 -DCMAKE_CXX_COMPILER=/usr/bin/g++-11 . && make )
 
 WORKDIR /app
 

@@ -39,6 +39,4 @@ foreach(SOURCE ${SCRIPT_SOURCES})
     get_filename_component(EXECUTABLE ${SOURCE} NAME_WE)
     add_executable(${EXECUTABLE} ${SOURCE})
     target_link_libraries(${EXECUTABLE} util selogger_log_parser helper graph)
-    # MacOS sonomaでlinkerのエラーが出るため一時的に対処
-    set_target_properties(${EXECUTABLE} PROPERTIES LINK_FLAGS "-Xlinker -ld_classic")
 endforeach()
