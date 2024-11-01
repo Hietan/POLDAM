@@ -5,6 +5,9 @@ project(Poldam)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+set(CMAKE_C_COMPILER "/usr/bin/gcc-11")
+set(CMAKE_CXX_COMPILER "/usr/bin/g++-11")
+
 if(NOT DEFINED ENV{POLDAM_BOOST_PATH})
     message(FATAL_ERROR "POLDAM_BOOST_PATH environment variable is not defined")
 else()
