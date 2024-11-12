@@ -1,0 +1,48 @@
+FROM ubuntu:latest
+
+# FOR POLDAM
+ENV POLDAM_BOOST_PATH=/app/boost_1_80_0
+RUN apt update && \
+		apt install -y git wget gcc-11 g++-11 cmake make && \
+		apt install -y openjdk-8-jdk maven && \
+		git clone --recursive https://github.com/Hietan/POLDAM.git /app/POLDAM && \
+		wget http://downloads.sourceforge.net/project/boost/boost/1.80.0/boost_1_80_0.tar.gz -P /app && \
+		tar xfz /app/boost_1_80_0.tar.gz -C /app && \
+		rm /app/boost_1_80_0.tar.gz && \
+		(cd /app/POLDAM/Data/java8/selogger && mvn package -DskipTests) && \
+		(cd /app/POLDAM && cmake -DCMAKE_C_COMPILER=/usr/bin/gcc-11 -DCMAKE_CXX_COMPILER=/usr/bin/g++-11 . && make )
+
+# FOR defects4j
+RUN \
+  apt-get update -y && \
+  apt-get install software-properties-common -y && \
+  apt-get update -y && \
+  apt-get install -y openjdk-11-jdk \
+                git \
+                build-essential \
+                subversion \
+                perl \
+                curl \
+                unzip \
+                cpanminus \
+                make \
+                && \
+  rm -rf /var/lib/apt/lists/*
+
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+ENV TZ=America/Los_Angeles
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+WORKDIR /
+RUN git clone https://github.com/rjust/defects4j.git defects4j
+
+WORKDIR /defects4j
+RUN cpanm --installdeps . --notest
+RUN ./init.sh
+
+ENV PATH="/defects4j/framework/bin:${PATH}"  
+
+
+WORKDIR /app
+CMD ["/bin/bash"]
