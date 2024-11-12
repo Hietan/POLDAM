@@ -10,7 +10,8 @@ RUN apt update && \
 		tar xfz /app/boost_1_80_0.tar.gz -C /app && \
 		rm /app/boost_1_80_0.tar.gz && \
 		(cd /app/POLDAM/Data/java8/selogger && mvn package -DskipTests) && \
-		(cd /app/POLDAM && cmake -DCMAKE_C_COMPILER=/usr/bin/gcc-11 -DCMAKE_CXX_COMPILER=/usr/bin/g++-11 . && make )
+		(cd /app/POLDAM && cmake -DCMAKE_C_COMPILER=/usr/bin/gcc-11 -DCMAKE_CXX_COMPILER=/usr/bin/g++-11 . && make ) && \
+		cp /app/POLDAM/Data/java8/selogger/target/selogger-0.5.0.jar /app
 
 # FOR defects4j
 RUN \
@@ -29,7 +30,7 @@ RUN \
                 && \
   rm -rf /var/lib/apt/lists/*
 
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-arm64
 
 ENV TZ=America/Los_Angeles
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

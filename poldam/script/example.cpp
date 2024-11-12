@@ -27,15 +27,15 @@ int main(int argc, char *argv[])
     // SELoggerから作成されたファイルを読み込む
     POLDAM::metafileFactory factory(config.originDir);
     auto dataids = factory.createInstance<POLDAM::DataIdsParser>("dataids.txt", true);
-    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: dataids" << endl;
+    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: dataids" << std::endl;
     auto seloggerParser = factory.createInstance<POLDAM::SeloggerLogParser>("log-00001.txt", "^log-.*.txt");
-    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: seloggerParser" << endl;
+    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: seloggerParser" << std::endl;
     auto objectFileParser = factory.createInstance<POLDAM::ObjectfileParser>();
-    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: ObjectfileParser" << endl;
+    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: ObjectfileParser" << std::endl;
     auto methodParser = factory.createInstance<POLDAM::MethodDataParser>("methods.txt", true);
-    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: methodParser" << endl;
+    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: methodParser" << std::endl;
     auto classesParser = factory.createInstance<POLDAM::ClassesDataParser>("classes.txt", true);
-    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: c" << endl;
+    std::cout << POLDAM_UTIL::POLDAM_PRINT_SUFFIX << "OK: c" << std::endl;
     std::cout << "OK\n";
 
     // 実際にログからグラフを構築するBuilder, configと合わせてログを構築する
